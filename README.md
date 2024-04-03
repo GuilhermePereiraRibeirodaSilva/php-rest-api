@@ -46,6 +46,14 @@ Esta é uma api simples e objetiva que permite consultar dados de clientes e pro
     - `Models/`: Nesta pasta ficam os Models do projeto, responsáveis por armazenar os dados das entidades participantes.
     - `Services/`: Nesta pasta ficam os Services do projeto, responsáveis por Gerenciar a lógica do projeto e fazer a comunição com os models.
     - `Resources/`: Nesta pasta ficam os Resources do projeto, responsáveis por sanitizar os dados vindos do banco de dados via models.
+    - `Routes/`: Nesta pasta ficam as Rotas do projeto.
+
+### Descrição da Api
+
+A api fornece dois módulos para consulta: O local e o externo. No módulo local, o banco de dados em ambiente local será chamado, já no módulo externo a api inserida no arquivo config.php será chamada. 
+Todos os prefixos da api local terão a palavra *api*. De tal forma, caso eu queira fazer uma chamada de listagem de clientes, posso chamar /api/clientes.
+Todos os prefixos da api external terão a palavra *external*. De tal forma, caso eu queira fazer uma chamada de listagem de clientes, posso chamar /external/clientes.
+Para mais informações consultar o arquivo Routes.php onde poderão ser encontradas todas as rotas.
 
 ## Suporte
 
