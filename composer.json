@@ -1,0 +1,19 @@
+{
+    "name": "restapi/rest-api",
+    "description": "A small php rest api",
+    "license": "Mit License",
+    "autoload": {
+        "psr-4": {
+            "Restapi\\RestApi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Guilherme Pereira",
+            "email": "guinovembro43@gmail.com"
+        }
+    ],
+    "require": {
+        "klein/klein": "^2.1"
+    }
+}
