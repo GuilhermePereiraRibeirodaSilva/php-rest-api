@@ -3,21 +3,21 @@ namespace Restapi\RestApi\Http\Controllers;
 
 use Exception;
 use Klein\Request;
-use Restapi\RestApi\Http\Services\ProductService;
+use Restapi\RestApi\Http\Services\orderService;
 use Restapi\RestApi\Http\Traits\ApiResponse;
 
 /**
- * Class responsible for sanitizing and validating requests to product service.
+ * Class responsible for sanitizing and validating requests to order service.
  */
-class ProductController{
+class OrderController{
     use ApiResponse;
 
     /**
-     * Product service.
+     * Order service.
      * 
-     * @var ProductService $productService
+     * @var orderService $orderService
      */
-    private ProductService $productService;
+    private orderService $orderService;
 
     /**
      * Constructor method. Loads dependencies.
@@ -25,62 +25,62 @@ class ProductController{
      * @return void
      */
     public function __construct(){
-        $this->productService = new ProductService();
+        $this->orderService = new orderService();
     }
 
     /**
-     * Lists Products.
+     * Lists orders.
      */
     public function list(){
         print_r(
             $this->ok(
-                $this->productService->list()
+                $this->orderService->list()
             )
         );
     }
 
     /**
-     * Get Product by id.
+     * Get order by id.
      * 
-     * @param int $id The Product id.
+     * @param int $id The order id.
      */
     public function get(int $id){
         print_r(
             $this->ok(
-                $this->productService->get($id)
+                $this->orderService->get($id)
             )
         );
     }
 
     /**
-     * Delete Product by id.
+     * Delete order by id.
      * 
-     * @param int $id The Product id.
+     * @param int $id The order id.
      */
     public function delete(int $id){
         print_r(
             $this->ok(
-                $this->productService->delete($id)
+                $this->orderService->delete($id)
             )
         );
     }
 
     /**
-     * Insert Product.
+     * Insert order.
      * 
      * @param Request $request The request with params.
      */
     public function insert(Request $request){
         try{
             if(
-                !isset($request->name) || !isset($request->value) 
-                || empty($request->name) || empty($request->value)
+                !isset($request->clientId) || !isset($request->productId) || !isset($request->quantity)
+                || empty($request->clientId) || empty($request->productId) || empty($request->quantity)
             ){
                 throw new Exception('Bad request');
             }
             print_r(
                 $this->ok(
-                    $this->productService->insert($request->name, floatval($request->value))
+                    $this->orderService->insert($request->clientId, $request->productId, $request->quantity)
                 )
             );
         }catch(Exception $e){
@@ -89,7 +89,7 @@ class ProductController{
     }
 
     /**
-     * Update Product.
+     * Update order.
      * 
      * @param Request $request The request with params.
      */
@@ -97,17 +97,17 @@ class ProductController{
         try{
             if(
                 !isset($request->id) || !is_numeric($request->id)
-                || (!isset($request->name) && !isset($request->id))
             ){
                 throw new Exception('Bad request'); 
             }
 
-            $name = isset($request->name) && !empty($request->name) ? $request->name : '';
-            $value = isset($request->value) && !empty($request->value) ? floatval($request->value) : 0;
+            $productId = isset($request->productId) && is_numeric($request->productId) ? intval($request->productId) : 0;
+            $clientId = isset($request->clientId) && is_numeric($request->clientId) ? intval($request->clientId) : 0;
+            $quantity = isset($request->quantity) && is_numeric($request->quantity) ? intval($request->quantity) : 0;
 
             print_r(
                 $this->ok(
-                    $this->productService->update($request->id, $name, $value)
+                    $this->orderService->update($request->id, $clientId, $productId, $quantity)
                 )
             );
         }catch(Exception $e){
