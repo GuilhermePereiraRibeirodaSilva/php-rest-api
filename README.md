@@ -44,6 +44,7 @@ comunicam com as rotas locais.
 │   │   └───Traits
 │   └───Routes
 └───vendor
+└───logs
 ```
 
 ### Descrição da Estrutura de Pastas
@@ -55,6 +56,7 @@ comunicam com as rotas locais.
     - `Services/`: Nesta pasta ficam os Services do projeto, responsáveis por Gerenciar a lógica do projeto e fazer a comunição com os models.
     - `Resources/`: Nesta pasta ficam os Resources do projeto, responsáveis por sanitizar os dados vindos do banco de dados via models.
     - `Routes/`: Nesta pasta ficam as Rotas do projeto.
+- `logs/`: Nesta pasta ficam os logs de possíveis erros que possam acontecer durante a execução do código.
 
 ### Descrição da Api
 
