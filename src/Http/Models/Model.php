@@ -1,6 +1,7 @@
 <?php
 namespace Restapi\RestApi\Http\Models;
 
+use Restapi\RestApi\Http\Traits\Logging;
 use PDO;
 use PDOStatement;
 use PDOException;
@@ -10,7 +11,7 @@ use Restapi\RestApi\Http\Traits\ApiResponse;
  * Class responsible for standarzing database operations.
  */
 abstract class Model{
-    use ApiResponse;
+    use ApiResponse, Logging;
 
     /**
      * Data object.
@@ -45,6 +46,7 @@ abstract class Model{
             }
         }catch(PDOException $e){
             //Connection failed!
+            $this->logError($e);
             return $this->systemFailure();
         }
     }
@@ -60,6 +62,7 @@ abstract class Model{
         try{
             return $this->pdo->prepare($query);
         }catch(PDOException $e){
+            $this->logError($e);
             return $this->systemFailure();
         }
     }
@@ -76,6 +79,7 @@ abstract class Model{
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }catch(PDOException $e){
+            $this->logError($e);
             return $this->systemFailure();
         }
     }

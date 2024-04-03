@@ -2,6 +2,7 @@
 namespace Restapi\RestApi\Routes;
 
 use Klein\Request;
+use Restapi\RestApi\Http\Traits\Logging;
 use Restapi\RestApi\Http\Controllers\ClientController;
 use Restapi\RestApi\Http\Controllers\ProductController;
 use Restapi\RestApi\Http\Controllers\OrderController;
@@ -11,7 +12,7 @@ use Restapi\RestApi\Http\Api\Controllers\OrderController as OrderControllerExter
 use Restapi\RestApi\Http\Traits\ApiResponse;
 
 class Routes{
-    use ApiResponse;
+    use ApiResponse, Logging;
 
     private $klein;
 
@@ -24,6 +25,7 @@ class Routes{
             
             $this->klein->dispatch();
         }catch(\Exception $e){
+            $this->logError($e);
             $this->systemFailure();
         } 
     }

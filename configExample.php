@@ -10,3 +10,6 @@ define('dbpassword','type_your_password');
 define('login','your_login');
 define('password','your_password');
 define('apiUrl','your_api_url');
+
+define('errorLogPath','./logs/error.log');
+define('logType',3);

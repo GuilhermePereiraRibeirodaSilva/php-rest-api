@@ -2,13 +2,14 @@
 namespace Restapi\RestApi\Http\Api\Services;
 
 use Exception;
+use Restapi\RestApi\Http\Traits\Logging;
 use Restapi\RestApi\Http\Traits\ApiResponse;
 
 /**
  * class responsible by controlling the external api.
  */
 class ExternalApiService{
-    use ApiResponse;
+    use ApiResponse, Logging;
 
     /**
      * Bearer token for access.
@@ -53,7 +54,7 @@ class ExternalApiService{
                 CURLOPT_CUSTOMREQUEST => $method,
             ];
             if(0 !== count($body)){
-                $curlArray[CURLOPT_POSTFIELDS] = $body;
+                $curlArray[CURLOPT_POSTFIELDS] = json_encode($body);
             }
             curl_setopt_array($curl, $curlArray);
     
@@ -67,6 +68,7 @@ class ExternalApiService{
 
             curl_close($curl);
         }catch(Exception $e){
+            $this->logError($e);
             $this->badRequest();
         }
     }

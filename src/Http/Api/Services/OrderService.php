@@ -59,8 +59,7 @@ class OrderService extends Service{
             'CLIENTE_ID' => $clientId,
             'ITEMS' => $items
         ];
-        echo $this->externalApiService->curlRequest("/pedidos", $this->headers, 'POST', $body);
-        exit;
+
         return [$this->externalApiService->curlRequest("/pedidos", $this->headers, 'POST', $body)];
     }
 

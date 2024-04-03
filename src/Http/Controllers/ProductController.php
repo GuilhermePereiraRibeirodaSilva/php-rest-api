@@ -3,6 +3,7 @@ namespace Restapi\RestApi\Http\Controllers;
 
 use Exception;
 use Klein\Request;
+use Restapi\RestApi\Http\Traits\Logging;
 use Restapi\RestApi\Http\Services\ProductService;
 use Restapi\RestApi\Http\Traits\ApiResponse;
 
@@ -10,7 +11,7 @@ use Restapi\RestApi\Http\Traits\ApiResponse;
  * Class responsible for sanitizing and validating requests to product service.
  */
 class ProductController{
-    use ApiResponse;
+    use ApiResponse, Logging;
 
     /**
      * Product service.
@@ -84,6 +85,7 @@ class ProductController{
                 )
             );
         }catch(Exception $e){
+            $this->logError($e);
             $this->badRequest();
         }
     }
@@ -111,6 +113,7 @@ class ProductController{
                 )
             );
         }catch(Exception $e){
+            $this->logError($e);
             $this->badRequest();
         }
     }

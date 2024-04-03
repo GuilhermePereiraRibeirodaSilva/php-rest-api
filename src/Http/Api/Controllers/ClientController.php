@@ -3,6 +3,7 @@ namespace Restapi\RestApi\Http\Api\Controllers;
 
 use Exception;
 use Klein\Request;
+use Restapi\RestApi\Http\Traits\Logging;
 use Restapi\RestApi\Http\Api\Services\ClientService;
 use Restapi\RestApi\Http\Traits\ApiResponse;
 
@@ -10,7 +11,7 @@ use Restapi\RestApi\Http\Traits\ApiResponse;
  * Class responsible for sanitizing and validating requests to user service.
  */
 class ClientController{
-    use ApiResponse;
+    use ApiResponse, Logging;
 
     /**
      * Client service.
@@ -85,6 +86,7 @@ class ClientController{
                 )
             );
         }catch(Exception $e){
+            $this->logError($e);
             $this->badRequest();
         }
     }
@@ -112,6 +114,7 @@ class ClientController{
                 )
             );
         }catch(Exception $e){
+            $this->logError($e);
             $this->badRequest();
         }
     }
