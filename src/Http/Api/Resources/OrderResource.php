@@ -11,9 +11,21 @@ class OrderResource{
      * @param array $order order from database.
      */
     public static function toJson(array $order){
+        //Converting sub objets to array.
+        $order = json_decode(json_encode($order),true);
+
         return [
-            'clientId' => $order['CLIENTE_ID'],
-            'items' => $order['ITEMS'],
+            'client' => [
+                'name' => $order['cliente']['NOME'],
+                'city' => $order['cliente']['CIDADE_NOME'],
+            ],
+            'items' => array_map(function($item) {
+                return [
+                    'quantity' => $item['QUANTIDADE'],
+                    'productName' => $item["produto"]["NOME"],
+                    'total' => floatval($item['QUANTIDADE']) * floatval($item["produto"]['VLRUNIT'])
+                ];
+            }, $order['itens']),
         ];
     }
 }

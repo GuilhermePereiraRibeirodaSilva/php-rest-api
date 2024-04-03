@@ -107,6 +107,8 @@ class OrderController{
             }
 
             $items = isset($request->items) ? $request->items : [];
+            $items = $this->parseItems($request->items);
+            
             $clientId = isset($request->clientId) && is_numeric($request->clientId) ? intval($request->clientId) : 0;
 
             print_r(
@@ -131,6 +133,11 @@ class OrderController{
         $jsonString = str_replace('=>', ':', $items);
 
         $array = json_decode($jsonString, true);
+
+        if(!(json_last_error() === JSON_ERROR_NONE)){
+            //String is not json, returning own string.
+            return [$items];
+        }
 
         $objects = [];
         foreach ($array as $item) {

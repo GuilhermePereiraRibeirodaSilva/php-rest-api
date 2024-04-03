@@ -57,7 +57,7 @@ class OrderService extends Service{
     public function insert(int $clientId, array $items){
         $body = [
             'CLIENTE_ID' => $clientId,
-            'ITEMS' => $items
+            'itens' => $items
         ];
 
         return [$this->externalApiService->curlRequest("/pedidos", $this->headers, 'POST', $body)];
@@ -75,8 +75,8 @@ class OrderService extends Service{
     public function update(int $id, int $clientId=0, array $items=[]){
         $body = [];
 
-        if(!empty($name)) $body["CLIENTE_ID"] = $clientId;
-        if(!empty($items)) $body["ITEMS"] = $items;
+        if(!empty($clientId)) $body["CLIENTE_ID"] = $clientId;
+        if(!empty($items)) $body["itens"] = $items;
 
         return [$this->externalApiService->curlRequest("/pedidos/$id", $this->headers, 'PUT', $body)];
     }

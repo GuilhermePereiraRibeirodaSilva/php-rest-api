@@ -10,6 +10,14 @@ Esta é uma api simples e objetiva que permite consultar dados de clientes e pro
 3. PHP 8.0+ instalado e rodando na máquina.
 4. Servidor Apache (XAMPP).
 
+## Requisitos do teste
+
+1. Todas as rotas da rest api provida são consumidas, como pedido. 
+2. Apesar de ser opcional, também foi feita uma versão local dessa api para uso (CRUD).
+3. Os arquivos referentes as totas que chamam a api externa estão dentro da pasta api. As outras pastas dentro de http são referentes aos arquivos que se 
+comunicam com as rotas locais.
+4. Tanto a foto do modelo relacional como o código podem ser encontrados neste repositório, com os nomes db.jpg e db.sql
+
 ## Instalação
 
 1. Faça o download do tema dentro de sua pasta HTDOCS via github, usando o comando:
