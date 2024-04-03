@@ -14,7 +14,7 @@ Esta é uma api simples e objetiva que permite consultar dados de clientes e pro
 
 1. Todas as rotas da rest api provida são consumidas, como pedido. 
 2. Apesar de ser opcional, também foi feita uma versão local dessa api para uso (CRUD).
-3. Os arquivos referentes as totas que chamam a api externa estão dentro da pasta api. As outras pastas dentro de http são referentes aos arquivos que se 
+3. Os arquivos referentes as rotas que chamam a api externa estão dentro da pasta api. As outras pastas dentro de http são referentes aos arquivos que se 
 comunicam com as rotas locais.
 4. Tanto a foto do modelo relacional como o código podem ser encontrados neste repositório, com os nomes db.jpg e db.sql
 
