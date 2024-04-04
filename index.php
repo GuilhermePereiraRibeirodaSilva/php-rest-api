@@ -17,7 +17,6 @@ class init{
         if(class_exists($routesClass)){
             new $routesClass();
         }else{
-            echo 1234;
             //Critical class not found, returning 500.
             $this->systemFailure();
         }
